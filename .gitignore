@@ -1,3 +1,6 @@
 venv/*
 *.grb2
 *.grb2.inv
+*.nc
+.idea/*
+*__pycache__**

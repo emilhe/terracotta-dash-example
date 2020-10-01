@@ -1,30 +1,26 @@
 import os
+import urllib.request
 import numpy as np
+
 from netCDF4 import Dataset
+from config import DATA_DIR, GFS_KEY, PARAM_MAPPINGS, PARAMS_GFS
 
 """
-This script converts GFS weather data from the grib2 format (in which they are published) into numpy arrays,
-
-https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs
-
-The particular data files used in this example can be found here,
-
-https://www.ncei.noaa.gov/data/global-forecast-system/access/grid-003-1.0-degree/forecast/202009/20200901/gfs_3_20200901_0000_000.grb2
-https://www.ncei.noaa.gov/data/global-forecast-system/access/grid-003-1.0-degree/forecast/202009/20200901/gfs_3_20200901_0000_000.grb2.inv
-
+This script download GFS weather data and converts them from grib2 (in which they are published) into numpy arrays.
 """
 
-src = "data/gfs_3_20200901_0000_000"
+src = os.path.join(DATA_DIR, GFS_KEY)
+
+# Download data.
+base_url = "https://www.ncei.noaa.gov/data/global-forecast-system/access/grid-003-1.0-degree/forecast/"
+urllib.request.urlretrieve(f"{base_url}/202009/20200901/{GFS_KEY}.grb2.inv", f"{src}.grb2.inv")
+urllib.request.urlretrieve(f"{base_url}/202009/20200901/{GFS_KEY}.grb2", f"{src}.grb2")
 # Convert wgrid2 to nc.
-params = ["VGRD:100 m above ground", "UGRD:100 m above ground", "TMP:2 m above ground"]
-cmd = f"wgrib2 {src}.grb2 -s | egrep '(:{':|:'.join(params)}:)'|wgrib2 -i {src}.grb2 -netcdf {src}.nc"
+cmd = f"wgrib2 {src}.grb2 -s | egrep '(:{':|:'.join(PARAMS_GFS)}:)'|wgrib2 -i {src}.grb2 -netcdf {src}.nc"
 os.system(cmd)
 # Convert nc to numpy arrays.
-rootgrp = Dataset(f"{src}.nc", "r")
-lon = rootgrp['longitude'][:]
-lat = rootgrp['latitude'][:]
-ugrd = rootgrp['UGRD_100maboveground'][:][0]
-vgrd = rootgrp['VGRD_100maboveground'][:][0]
-wspd = (ugrd**2 + vgrd**2)**0.5
-temp = rootgrp['TMP_2maboveground'][:][0]
-np.savez(f"{src}.npz", lat=lat, lon=lon, wspd=wspd, temp=temp)
+ds = Dataset(f"{src}.nc", "r")
+lon = ds['longitude'][:]
+lat = ds['latitude'][:]
+params = {param: PARAM_MAPPINGS[param](ds) for param in PARAM_MAPPINGS}
+np.savez(f"{src}.npz", lat=lat, lon=lon, **params)
