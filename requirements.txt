@@ -1,0 +1,11 @@
+terracotta
+flask
+numpy
+pandas
+scipy
+rasterio
+rio-cogeo
+pyproj
+dash
+dash_leaflet
+netCDF4
