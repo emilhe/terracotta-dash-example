@@ -8,6 +8,10 @@ Special care has been taken to ensure WYSIWYG pixel drilling, i.e. a 1:1 corresp
 
 #### Running the demo 
 
+Clone the repo, and enter the folder,
+
+    git clone git@github.com:thedirtyfew/terracotta-dash-example.git && cd terracotta-dash-example
+
 Create a virtual environment and install Python requirements,
 
     python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
@@ -20,7 +24,7 @@ The tiles are served to the map component via a tile server. In this example, [T
 
     python3 tc_server.py
 
-With the tile server running, the demo application can now be started,
+With the tile server running, start the demo application in a different terminal,
 
     python3 app.py
 
