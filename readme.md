@@ -8,6 +8,10 @@ Special care has been taken to ensure WYSIWYG pixel drilling, i.e. a 1:1 corresp
 
 #### Running the demo 
 
+Clone the repo, and enter the folder,
+
+    git clone git@github.com:thedirtyfew/terracotta-dash-example.git && cd terracotta-dash-example
+
 Create a virtual environment and install Python requirements,
 
     python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
