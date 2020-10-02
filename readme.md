@@ -1,6 +1,6 @@
-The repository holds a small example of a Python stack that enables visualization of geospatial raster data. It consists of three main elements,
+This repository holds a small example of a Python stack that enables visualization of geospatial raster data. It consists of three main elements,
 
-1) A few scripts that converts wrib2 files / numpy arrays into [cloud optimized geotiff](https://www.cogeo.org/) (COG)
+1) A few scripts that convert wrib2 files / numpy arrays into [cloud optimized geotiff](https://www.cogeo.org/) (COG)
 2) A script that launches a [Terracotta](https://github.com/DHI-GRAS/terracotta) tile server to serve the geotiff files
 3) A demo application written in [Dash](https://plotly.com/dash/) that visualizes the data using the [dash-leaflet](https://github.com/thedirtyfew/dash-leaflet) library
 
@@ -8,15 +8,15 @@ Special care has been taken to ensure WYSIWYG pixel drilling, i.e. a 1:1 corresp
 
 #### Running the demo 
 
-Create a virtual environment and install python requirements,
+Create a virtual environment and install Python requirements,
 
     python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
 
-Next, we need some example data. In this example, we'll use weather data from [GFS](https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs), but any geospatial raster data would do. A small script is included that fetches data for the 1st of January 2020 and converts them to numpy arrays,
+Next, we need some data. In this example, we'll use weather data from [GFS](https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs), but any geospatial raster data would do. A small script is included that fetches data for the 1st of January 2020 and converts them to numpy arrays,
 
     python3 gfs_to_npz.py
 
-Before the data can be loaded by the tile server, it must be converted into COG. Simply run,
+Before the data can be loaded by the tile server, it must be converted into COG. Simply run
 
     python3 npz_to_tiff.py
     
@@ -42,8 +42,8 @@ Both [Terracotta](https://github.com/DHI-GRAS/terracotta) and [Dash](https://plo
 
 To ensure a 1:1 correspondence between the values shown on the map, and the sampled valued, 
 
-* The data must be interpolated onto a grid that is regular in the projection in which the data is viewed. Most web maps, including this example, use `epsg:3857`. This task is performed by the `interpolate_onto_grid` function.
+* The data must be interpolated onto a grid that is regular in the projection in which the data is viewed. Most web maps, including this example, use `epsg:3857`. This task is performed by the `interpolate_onto_grid` function
 
-* The pixels of the data grid must be aligned with map tiles. This is ensured by passing `web_optimized=True` to the `cog_translate` function. 
+* The pixels of the data grid must be aligned with map tiles. This is ensured by passing `web_optimized=True` to the `cog_translate` function
 
-* The tile server cannot perform any post processing (e.g. interpolation) of the data. With Terracotta, this is achieved via the settings `REPROJECTION_METHOD="nearest"`.
+* The tile server cannot perform any post processing (e.g. interpolation) of the data. With Terracotta, this is achieved via the settings `REPROJECTION_METHOD="nearest"`
