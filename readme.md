@@ -28,11 +28,13 @@ With the tile server running, start the demo application in a different terminal
 
     python3 app.py
 
-If you open a browser and go `http://localhost:8050`, the map visualization should appear.
+If you open a browser and go to `http://localhost:8050`, you should see a map like this
+
+![Optional Text](./assets/screenshot.png)
 
 #### Can i visualize my own data? 
 
-It should be straight forward to visualize other geospatial raster data, you just need to setup a pipeline to convert them into COG. The `npz_to_tiff.py`, which takes simple numpy arrays as input, should be a good starting point.
+It is straight forward to visualize other geospatial raster data, you just need to setup a pipeline to convert them into COG. The `npz_to_tiff.py`, which takes simple numpy arrays as input, should be a good starting point.
 
 #### What about production?
 

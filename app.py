@@ -33,7 +33,7 @@ app.layout = html.Div(children=[
         html.Div("Parameter"),
         dcc.Dropdown(id="dd_param", options=[dict(value=p, label=lbl_map[p]) for p in PARAMS], value=param0),
         html.Br(),
-        html.Div("Colorbar"),
+        html.Div("Colorscale"),
         dcc.Dropdown(id="dd_cmap", options=[dict(value=c, label=c) for c in cmaps], value=cmap0),
         html.Br(),
         html.Div("Opacity"),
