@@ -25,7 +25,7 @@ def init_db(keys, key_descriptions=None, nuke=False):
 
 init_db(keys=["gfs", "parameter"], nuke=True)
 # Create terracotta server.
-update_settings(DRIVER_PATH=DRIVER_PATH, RESAMPLING_METHOD="nearest", REPROJECTION_METHOD="nearest")
+update_settings(DRIVER_PATH=DRIVER_PATH, REPROJECTION_METHOD="nearest")
 server = create_app()
 # Bind custom stuff.
 point.register(server)

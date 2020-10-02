@@ -4,9 +4,9 @@ The repository hold a small example of a Python stack that enables visualization
 2) A script that launches a [Terracotta](https://github.com/DHI-GRAS/terracotta) tile server to serve the geotiff files
 3) A demo application written in [Dash](https://plotly.com/dash/) that visualizes the data using the [dash-leaflet](https://github.com/thedirtyfew/dash-leaflet) library
 
-In addition to visualizing the data on the map, the example also demonstrates how to sample data from the underlying raster. Special care has been taken to ensure a 1:1 correspondence between the values shown on the map, and the sampled valued. 
+In addition to visualizing the data on the map, the example also demonstrates how to sample data from the underlying raster. Special care has been taken to ensure WYSIWYG pixel drilling, i.e. a 1:1 correspondence between the values shown on the map and the sampled valued. 
 
-### Running the demo 
+#### Running the demo 
 
 Create a virtual environment and install python requirements,
 
@@ -30,15 +30,15 @@ With the tile server running, the demo application can now be started,
 
 If you open and browser and go `http://localhost:8050`, the map visualization should appear.
 
-### Can i visualize my own data? 
+#### Can i visualize my own data? 
 
 It should be more-or-less straight forward to visualize custom data, you just need to setup a pipeline to convert them into COG. The `npz_to_tiff.py`, which takes simple numpy arrays as input, should be a good starting point.
 
-### What about production?
+#### What about production?
 
 Both [Terracotta](https://github.com/DHI-GRAS/terracotta) and [Dash](https://plotly.com/dash/) are based on [Flask](https://flask.palletsprojects.com/en/1.1.x/). In production, a proper web server (such a [gunicorn](https://gunicorn.org/)) should be used.
 
-### How did you achieve WYSIWYG pixel drilling?
+#### How did you achieve WYSIWYG pixel drilling?
 
 To ensure a 1:1 correspondence between the values shown on the map, and the sampled valued, a few step are necessary.
 
@@ -46,4 +46,4 @@ To ensure a 1:1 correspondence between the values shown on the map, and the samp
 
 * The pixels of the data grid must be aligned with map tiles. This is ensured by passing `web_optimized=True` to the `cog_translate` function. 
 
-* The tile server cannot perform any post processing (e.g. interpolation) of the data. With Terracotta, this is achieved via the settings `RESAMPLING_METHOD="nearest"` and `REPROJECTION_METHOD="nearest"`.
+* The tile server cannot perform any post processing (e.g. interpolation) of the data. With Terracotta, this is achieved via the settings `REPROJECTION_METHOD="nearest"`.
