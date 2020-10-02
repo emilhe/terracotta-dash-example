@@ -1,10 +1,10 @@
-The repository hold a small example of a Python stack that enables visualization of geospatial raster data. It consists of three main elements,
+The repository holds a small example of a Python stack that enables visualization of geospatial raster data. It consists of three main elements,
 
-1) Pre processing scripts that converts wrib2 files / numpy arrays into [cloud optimized geotiff](https://www.cogeo.org/) (COG)
+1) A few scripts that converts wrib2 files / numpy arrays into [cloud optimized geotiff](https://www.cogeo.org/) (COG)
 2) A script that launches a [Terracotta](https://github.com/DHI-GRAS/terracotta) tile server to serve the geotiff files
 3) A demo application written in [Dash](https://plotly.com/dash/) that visualizes the data using the [dash-leaflet](https://github.com/thedirtyfew/dash-leaflet) library
 
-In addition to visualizing the data on the map, the example also demonstrates how to sample data from the underlying raster. Special care has been taken to ensure WYSIWYG pixel drilling, i.e. a 1:1 correspondence between the values shown on the map and the sampled valued. 
+Special care has been taken to ensure WYSIWYG pixel drilling, i.e. a 1:1 correspondence between the values shown on the map and the sampled valued. 
 
 #### Running the demo 
 
@@ -28,11 +28,11 @@ With the tile server running, the demo application can now be started,
 
     python3 app.py
 
-If you open and browser and go `http://localhost:8050`, the map visualization should appear.
+If you open a browser and go `http://localhost:8050`, the map visualization should appear.
 
 #### Can i visualize my own data? 
 
-It should be more-or-less straight forward to visualize custom data, you just need to setup a pipeline to convert them into COG. The `npz_to_tiff.py`, which takes simple numpy arrays as input, should be a good starting point.
+It should be straight forward to visualize other geospatial raster data, you just need to setup a pipeline to convert them into COG. The `npz_to_tiff.py`, which takes simple numpy arrays as input, should be a good starting point.
 
 #### What about production?
 
@@ -40,9 +40,9 @@ Both [Terracotta](https://github.com/DHI-GRAS/terracotta) and [Dash](https://plo
 
 #### How did you achieve WYSIWYG pixel drilling?
 
-To ensure a 1:1 correspondence between the values shown on the map, and the sampled valued, a few step are necessary.
+To ensure a 1:1 correspondence between the values shown on the map, and the sampled valued, 
 
-* The data must be interpolated onto a grid that is regular in the coordinates system in which the data is viewed. In most web based maps (including this example), `epsg:3857` is used. This task is performed by the `interpolate_onto_grid` function.
+* The data must be interpolated onto a grid that is regular in the projection in which the data is viewed. Most web maps, including this example, use `epsg:3857`. This task is performed by the `interpolate_onto_grid` function.
 
 * The pixels of the data grid must be aligned with map tiles. This is ensured by passing `web_optimized=True` to the `cog_translate` function. 
 
