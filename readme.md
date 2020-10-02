@@ -1,6 +1,6 @@
 This repository holds a small example of a Python stack that enables visualization of geospatial raster data. It consists of three main elements,
 
-1) A few scripts that convert wrib2 files / numpy arrays into [cloud optimized geotiff](https://www.cogeo.org/) (COG)
+1) A few scripts that convert wgrib2 files / numpy arrays into [cloud optimized geotiff](https://www.cogeo.org/) (COG)
 2) A script that launches a [Terracotta](https://github.com/DHI-GRAS/terracotta) tile server to serve the geotiff files
 3) A demo application written in [Dash](https://plotly.com/dash/) that visualizes the data using the [dash-leaflet](https://github.com/thedirtyfew/dash-leaflet) library
 
@@ -32,7 +32,7 @@ If you open a browser and go to `http://localhost:8050`, you should see a map li
 
 ![Optional Text](./assets/screenshot.png)
 
-#### Can i visualize my own data? 
+#### Can I visualize my own data? 
 
 It is straight forward to visualize other geospatial raster data, you just need to setup a pipeline to convert them into COG. The `npz_to_tiff.py` script, which takes simple numpy arrays as input, should be a good starting point.
 
