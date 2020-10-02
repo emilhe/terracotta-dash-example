@@ -1,0 +1,30 @@
+body {
+  margin: 0; /* NOTE: This was 8px be Dash default */
+  font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
+  height: 100%;
+  overflow-y: hidden;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    display: grid;
+    z-index: 1000;
+}
+
+

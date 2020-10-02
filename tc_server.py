@@ -1,6 +1,6 @@
 import os
 import terracotta as tc
-import terracotta_dv.extensions
+from terracotta_toolbelt.extensions import point
 
 from terracotta import update_settings
 from terracotta.server import create_app
@@ -28,7 +28,7 @@ init_db(keys=["gfs", "parameter"], nuke=True)
 update_settings(DRIVER_PATH=DRIVER_PATH, RESAMPLING_METHOD="nearest", REPROJECTION_METHOD="nearest")
 server = create_app()
 # Bind custom stuff.
-terracotta_dv.extensions.point.register(server)
+point.register(server)
 
 if __name__ == '__main__':
     server.run(port=TC_PORT, host=TC_HOST, threaded=False)

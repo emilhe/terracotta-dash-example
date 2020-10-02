@@ -4,3 +4,4 @@ venv/*
 *.nc
 .idea/*
 *__pycache__**
+data/*
