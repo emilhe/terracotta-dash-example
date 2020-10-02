@@ -12,11 +12,7 @@ Create a virtual environment and install Python requirements,
 
     python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
 
-Next, we need some data. In this example, we'll use weather data from [GFS](https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs), but any geospatial raster data would do. A small script is included that fetches data for the 1st of January 2020 and converts them to numpy arrays,
-
-    python3 gfs_to_npz.py
-
-Before the data can be loaded by the tile server, it must be converted into COG. Simply run
+Next, we need some data. In this example, we'll use weather data from [GFS](https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs) (downloaded and parsed using the `gfs_to_npz.py` script) , but any geospatial raster data would do. Before the data can be loaded by the tile server, it must be converted into COG,
 
     python3 npz_to_tiff.py
     
