@@ -28,7 +28,7 @@ The tiles are served to the map component via a tile server. In this example, [T
 
     python3 tc_server.py
 
-With the tile server running, the demo application can now be started,
+With the tile server running, start the demo application in a different terminal,
 
     python3 app.py
 
